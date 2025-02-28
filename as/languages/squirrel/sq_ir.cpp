@@ -34,7 +34,7 @@ void SquirrelIR::init(std::shared_ptr<llvm::orc::LLJIT> jit, llvm::orc::ThreadSa
     double_t = llvm::Type::getDoubleTy(context);
     void_t  = llvm::Type::getVoidTy(context);
     bool_t = llvm::Type::getInt1Ty(context);
-    char_ptr_t = llvm::Type::getInt8PtrTy(context);
+    char_ptr_t = llvm::PointerType::get(context, 0);
 
     sq_vm_t = llvm::StructType::getTypeByName(context, "struct.SQVM");
     sq_vm_ptr_t = llvm::PointerType::getUnqual(sq_vm_t);
@@ -95,7 +95,7 @@ llvm::Value* SquirrelIR::buildPopValue(llvm::IRBuilder<>& builder, llvm::Value* 
   llvm::Value* stackPos_ir = builder.getInt64(stackPos);
 
   // Добавляем вызов функции вывода в пустышку
-  llvm::FunctionType* printfType = llvm::FunctionType::get(builder.getInt32Ty(), builder.getInt8PtrTy(), true);
+  llvm::FunctionType* printfType = llvm::FunctionType::get(builder.getInt32Ty(), builder.getPtrTy(), true);
   llvm::Module* module = builder.GetInsertBlock()->getParent()->getParent();
   llvm::FunctionCallee printfFunc = module->getOrInsertFunction("printf", printfType);
 

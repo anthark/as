@@ -40,7 +40,7 @@ void LuaIR::init(llvm::orc::ThreadSafeContext ts_context)
     double_t = llvm::Type::getDoubleTy(context);
     float_t = llvm::Type::getFloatTy(context);
     bool_t = llvm::Type::getInt1Ty(context);
-    char_ptr_t = llvm::Type::getInt8PtrTy(context);
+    char_ptr_t = llvm::PointerType::get(context, 0);
     void_ptr_t = char_ptr_t;
 
     lua_State_t = llvm::StructType::getTypeByName(context, "struct.lua_State");

@@ -54,6 +54,7 @@ llvm_map_components_to_libnames(llvm_libs
     executionengine
     mcjit
     orcjit
+    orcdebugging
 )
 
 foreach(target ${LLVM_TARGETS_TO_BUILD})

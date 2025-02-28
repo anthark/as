@@ -62,12 +62,12 @@ llvm::Function* IvnScriptLanguageScript::buildModule(
     llvm::Module& module)
 {
     auto& context = module.getContext();
-    const auto void_ptr_t = llvm::Type::getInt8PtrTy(context);
+    const auto void_ptr_t = llvm::PointerType::get(context, 0);
     m_runtime_var = new llvm::GlobalVariable(module, void_ptr_t, false, llvm::GlobalValue::PrivateLinkage,
         llvm::ConstantPointerNull::get(void_ptr_t), ".runtime");
 
     const auto void_t = llvm::Type::getVoidTy(context);
-    const auto char_ptr_t = llvm::Type::getInt8PtrTy(context);
+    const auto char_ptr_t = llvm::PointerType::get(context, 0);
 
     m_runtime_enter = ir::сreateFunctionDecl(&module, void_t, { void_ptr_t, char_ptr_t }, "__isRuntimeOnEnter");
 

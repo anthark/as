@@ -6,10 +6,10 @@ Getting Started
 
 ### Prerequisites
 - `cmake`, `ninja`, any C++ compiler
-- `LLVM 17.0.6`. For macOS and arm64, if it is not supplied, the pre-built binaries are downloaded automatically.
+- `LLVM 18.1.0`. For macOS and arm64, if it is not supplied, the pre-built binaries are downloaded automatically. For Windows prebuild package can be downloaded from here: https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.0/clang+llvm-18.1.0-x86_64-pc-windows-msvc.tar.xz
 - `LuaJIT` downloaded and built if you want to use Lua benchmarks
 
-The environment variable `LLVM_ROOT_DIR` should be set to the directory where the LLVM 17.0.6 binaries are located 
+The environment variable `LLVM_ROOT_DIR` should be set to the directory where the LLVM 18.1.0 binaries are located 
 (this directory should contain `bin`, `include`, `lib`, and other directories). 
 In case the variable is not set, the binaries are downloaded during the `cmake` run.
 However, currently, downloading is only supported for macOS, arm64.
@@ -36,6 +36,10 @@ Or (if you want to use LuaJIT):
 cmake -S . -B ./build -G "Visual Studio 17" -DLUA_JIT_LIBS=<path-to-luajit-libs> -DLUA_JIT_INCLUDE=<path-to-luajit-includes>
 cmake --build ./build
 ```
+##### Known issue: 
+ If linker complains about diaguids.lib path (it tries to look for it at Professional package of Visual Studio 2019), just create this folder and copy DIA SDK to it. 
+##### Known issue: 
+You can only build Release, MinSizeRel and RelWithDebInfo if you use downloaded LLVM. It is needed to compile LLVM locally in Debug configuration to compile AS in Debug configuration. 
 
 #### Build with CLion
 Simply open the project with CLion and set `LLVM_ROOT_DIR` environment variable.
@@ -60,4 +64,5 @@ Reference
 - [How To: Testing](./docs/howto_test.md)
 - [How To: Introducing A New Language](./docs/howto_new_language.md)
 - [What's Next](./docs/whats_next.md)
+
 

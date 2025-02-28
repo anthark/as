@@ -4,6 +4,7 @@
 #include <filesystem>
 
 #include "llvm/ExecutionEngine/Orc/LLJIT.h"
+#include "llvm/ExecutionEngine/Orc/Debugging/DebuggerSupport.h"
 
 #include "cpp_interface_parser.h"
 #include "language.h"
@@ -55,8 +56,8 @@ CoreCompile::CoreCompile(const std::string& base_path, bool add_init):
     llvm::InitializeAllAsmParsers();
 
     auto builder = llvm::orc::LLJITBuilder();
-    builder.EnableDebuggerSupport = true;
     m_jit = ExitOnErr(builder.create());
+    llvm::orc::enableDebuggerSupport(*m_jit);
 }
 
 CoreCompile::~CoreCompile()

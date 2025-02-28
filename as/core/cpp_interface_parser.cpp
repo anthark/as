@@ -52,10 +52,10 @@ const std::shared_ptr<ScriptInterface>& CPPParser::parse(const std::string& code
     auto invocation = std::make_shared<clang::CompilerInvocation>();
     auto mem_buffer = llvm::MemoryBuffer::getMemBuffer(code_with_hack);
 
-    invocation->getLangOpts()->CPlusPlus = true;
-    invocation->getLangOpts()->CPlusPlus11 = true;
-    invocation->getLangOpts()->CPlusPlus20 = true;
-    invocation->getLangOpts()->Bool = true;
+    invocation->getLangOpts().CPlusPlus = true;
+    invocation->getLangOpts().CPlusPlus11 = true;
+    invocation->getLangOpts().CPlusPlus20 = true;
+    invocation->getLangOpts().Bool = true;
 
     // [TODO] AZ Make adjustable path to include
     auto &headerSearchOpts = invocation->getHeaderSearchOpts();

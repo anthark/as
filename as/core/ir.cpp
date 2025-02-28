@@ -73,8 +73,8 @@ llvm::Function* createRegisterVTableDecl(llvm::Module& module)
     llvm::LLVMContext& context = module.getContext();
 
     const auto void_t = llvm::Type::getVoidTy(context);
-    const auto char_ptr_t = llvm::Type::getInt8PtrTy(context);
-    const auto void_ptr_t = llvm::Type::getInt8PtrTy(context);
+    const auto char_ptr_t = llvm::PointerType::get(context, 0);
+    const auto void_ptr_t = llvm::PointerType::get(context, 0);
     const auto int_t = llvm::Type::getInt32Ty(context);
     const auto func_t = llvm::FunctionType::get(void_t, { void_ptr_t, char_ptr_t, void_ptr_t, int_t }, false);
     return llvm::Function::Create(func_t, llvm::Function::ExternalLinkage, "__asRegisterVTable", module);
@@ -84,8 +84,8 @@ llvm::Function* createRequireRuntimeDecl(llvm::Module& module)
 {
     llvm::LLVMContext& context = module.getContext();
 
-    const auto void_ptr_t = llvm::Type::getInt8PtrTy(context);
-    const auto char_ptr_t = llvm::Type::getInt8PtrTy(context);
+    const auto void_ptr_t = llvm::PointerType::get(context, 0);
+    const auto char_ptr_t = llvm::PointerType::get(context, 0);
     const auto func_t = llvm::FunctionType::get(void_ptr_t, { void_ptr_t, char_ptr_t }, false);
     return llvm::Function::Create(func_t, llvm::Function::ExternalLinkage, "__asRequireRuntime", module);
 }
@@ -95,8 +95,8 @@ llvm::Function* createRegisterInitDecl(llvm::Module& module)
     llvm::LLVMContext& context = module.getContext();
 
     const auto void_t = llvm::Type::getVoidTy(context);
-    const auto char_ptr_t = llvm::Type::getInt8PtrTy(context);
-    const auto void_ptr_t = llvm::Type::getInt8PtrTy(context);
+    const auto char_ptr_t = llvm::PointerType::get(context, 0);
+    const auto void_ptr_t = llvm::PointerType::get(context, 0);
     const auto func_t = llvm::FunctionType::get(void_t, { char_ptr_t, void_ptr_t }, false);
     return llvm::Function::Create(func_t, llvm::Function::ExternalLinkage, "__asRegisterInit", module);
 }
@@ -119,7 +119,7 @@ void buildGlobalCtor(llvm::Module& module, llvm::Function* ctor, const unsigned 
     std::vector<llvm::Constant*> ctor_values = {
         builder.getInt32(priority),
         ctor,
-        llvm::ConstantPointerNull::get(builder.getInt8PtrTy())
+        llvm::ConstantPointerNull::get(builder.getPtrTy())
     };
     llvm::Constant* ctor_init = llvm::ConstantStruct::getAnon(ctor_values);
 
@@ -164,7 +164,7 @@ llvm::Function* createInitFunc(llvm::Module& module,
     const auto module_name_var = vtable || init_name.empty() ? builder.CreateGlobalStringPtr(module_name, ".module_name", 0, &module) : nullptr;
 
     const auto void_t = llvm::Type::getVoidTy(context);
-    const auto void_ptr_t = llvm::Type::getInt8PtrTy(context);
+    const auto void_ptr_t = llvm::PointerType::get(context, 0);
     llvm::FunctionType* init_func_t = llvm::FunctionType::get(void_t, { void_ptr_t }, false);
     const auto linkage = init_name.empty() ? llvm::Function::InternalLinkage : llvm::Function::ExternalLinkage;
     const auto name = init_name.empty() ? ".init_" + module_name : init_name;

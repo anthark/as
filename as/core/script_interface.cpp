@@ -42,7 +42,7 @@ std::shared_ptr<ScriptInterface> ScriptInterface::fromRecordDecl(clang::RecordDe
             continue;
 
         const auto function = it->getAsFunction();
-        if (function->isPure())
+        if (function->isPureVirtual())
         {
             llvm::FunctionType* function_type = clang::CodeGen::convertFreeFunctionType(cgm, function);
             llvm::FunctionType* method_type = ir::buildInterfaceMethodType(function_type, interface->interface_ptr_t);

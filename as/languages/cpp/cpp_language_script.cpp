@@ -23,7 +23,7 @@ bool isImplementation(clang::RecordDecl* record_decl)
             continue;
 
         const auto f = it->getAsFunction();
-        if (f->isPure())
+        if (f->isPureVirtual())
             return false;
     }
 
@@ -84,7 +84,7 @@ public:
             }
 
             const auto f = it->getAsFunction();
-            if (f->isPure() || !f->hasBody())
+            if (f->isPureVirtual() || !f->hasBody())
                 continue;
 
             const std::string func_name = f->getNameAsString();
@@ -161,11 +161,11 @@ void CppLanguageScript::createCompiler(const std::string& filename, const std::s
 
     auto invocation = std::make_shared<clang::CompilerInvocation>();
 
-    invocation->getLangOpts()->CPlusPlus = true;
-    invocation->getLangOpts()->CPlusPlus11 = true;
-    invocation->getLangOpts()->CPlusPlus20 = true;
-    invocation->getLangOpts()->Bool = true;
-    invocation->getLangOpts()->EmitAllDecls = true;
+    invocation->getLangOpts().CPlusPlus = true;
+    invocation->getLangOpts().CPlusPlus11 = true;
+    invocation->getLangOpts().CPlusPlus20 = true;
+    invocation->getLangOpts().Bool = true;
+    invocation->getLangOpts().EmitAllDecls = true;
 
     auto &headerSearchOpts = invocation->getHeaderSearchOpts();
     headerSearchOpts.AddPath(base_path, clang::frontend::Quoted, false, false);
