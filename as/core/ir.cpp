@@ -5,6 +5,7 @@
 #include <fstream>
 #include <regex>
 #include <sstream>
+#include <filesystem>
 
 #include <set>
 
@@ -284,7 +285,7 @@ std::string getRelativeFileName(const std::string& base_filename, const std::str
     std::filesystem::path base_file_path(std::filesystem::path(base_filename).parent_path());
     std::filesystem::path file_path = base_file_path / filename;
 
-    return file_path;
+    return file_path.string();
 }
 
 std::shared_ptr<ScriptInterface> getInterface(const std::string& filename,

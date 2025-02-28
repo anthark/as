@@ -6,7 +6,7 @@
 
 #include <string>
 #include <vector>
-#include <__filesystem/path.h>
+#include <filesystem>
 
 namespace as {
 class FileWatcher {

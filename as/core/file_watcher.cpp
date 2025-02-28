@@ -48,8 +48,8 @@ FileWatcher::FileWatcher(const std::string& base_path) :
 void FileWatcher::watch(const std::string& filename)
 {
     const auto path = m_base_path / filename;
-    const auto time = getLastWriteTime(path);
-    m_files.push_back({ path, filename, time, time });
+    const auto time = getLastWriteTime(path.string());
+    m_files.push_back({ path.string(), filename, time, time});
 }
 
 void FileWatcher::tick()

@@ -1,4 +1,5 @@
 #include <fstream>
+#include <filesystem>
 #include "clang/CodeGen/CodeGenAction.h"
 #include "clang/CodeGen/BackendUtil.h"
 #include "clang/AST/Mangle.h"
@@ -142,7 +143,7 @@ void CppLanguageScript::load(const std::string& filename, llvm::LLVMContext& con
     std::ifstream ifs(filename);
     m_content = { std::istreambuf_iterator<char>(ifs), std::istreambuf_iterator<char>() };
     m_content = "#define DEFINE_SCRIPT_INTERFACE(Type, I) struct Type { I };\n" + m_content;
-    createCompiler(filename, std::filesystem::path(filename).parent_path());
+    createCompiler(filename, std::filesystem::path(filename).parent_path().string());
 
     auto action2 = std::make_unique<CollectNamesAction>(context, m_script_interface, m_func_names);
     m_compiler->ExecuteAction(*action2);

@@ -4,6 +4,8 @@
 
 #include "benchmark_runner_luaclassic.h"
 
+#include <memory>
+
 extern "C"
 {
 #include "lua/lapi.c"
