@@ -8,3 +8,10 @@ add_library(BenchmarkLuaAs SHARED
 target_link_libraries(BenchmarkLuaAs
     LuaIntegration
 )
+
+if(MSVC)
+add_custom_command(TARGET BenchmarkLuaAs POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory ../../$<CONFIG>
+    COMMAND ${CMAKE_COMMAND} -E copy $<CONFIG>/BenchmarkLuaAs.dll ../../$<CONFIG>/
+)
+endif()

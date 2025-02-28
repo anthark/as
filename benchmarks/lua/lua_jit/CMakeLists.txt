@@ -15,3 +15,11 @@ target_link_libraries(BenchmarkLuaJit "${LUA_JIT_LIBS}/lua51.lib")
 else()
 target_link_libraries(BenchmarkLuaJit "${LUA_JIT_LIBS}/libluajit-5.1.a")
 endif()
+
+if(MSVC)
+add_custom_command(TARGET BenchmarkLuaJit POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory ../../$<CONFIG>
+    COMMAND ${CMAKE_COMMAND} -E copy $<CONFIG>/BenchmarkLuaJit.dll ../../$<CONFIG>/
+    COMMAND ${CMAKE_COMMAND} -E copy ${LUA_JIT_LIBS}/lua51.dll ../../$<CONFIG>/
+)
+endif()
