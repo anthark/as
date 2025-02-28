@@ -12,6 +12,7 @@
 #include "squirrel/include/squirrel.h"
 #include "squirrel/include/sqstdaux.h"
 
+#include <cstdarg>
 #include <iostream>
 #include <iomanip>
 

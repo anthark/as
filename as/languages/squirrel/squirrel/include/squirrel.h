@@ -60,7 +60,9 @@ struct SQDelegable;
 struct SQOuter;
 
 #ifdef _UNICODE
-#define SQUNICODE
+// It is supposed that Squirrel uses multibyte charset (SQchar is char and so on), but this macro switches it to Unicode when compiling with MSVC
+// and doesn't affect other compilers, so let it go
+//#define SQUNICODE
 #endif
 
 #include "sqconfig.h"
