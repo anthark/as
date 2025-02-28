@@ -86,7 +86,7 @@ void check_lua(const std::shared_ptr<as::Core>& script_core) {
   script_core->registerLanguage("lua", std::move(lua_language));
 
   TestInterfaceImpl iface;
-  script_core->registerInstance<TestInterface>(&iface, "iface");
+  script_core->registerInstance("iface", &iface);
 
   std::shared_ptr<as::ScriptModule<TestScript>> script_module;
   script_module = script_core->newScriptModule<TestScript>("./sandbox/scripts/test_v.lua", "lua");
@@ -114,10 +114,10 @@ void check_squirrel(const std::shared_ptr<as::Core>& script_core) {
   script_core->registerLanguage("sq", std::move(squirrel_language));
 
   TestInterfaceImpl iface;
-  script_core->registerInstance<TestInterface>(&iface, "iface");
+  script_core->registerInstance("iface", &iface);
 
   YetAnotherTestInterfaceImpl yaiface;
-  script_core->registerInstance<YetAnotherTestInterface>(&yaiface, "yaiface");
+  script_core->registerInstance("yaiface", &yaiface);
 
   std::shared_ptr<as::ScriptModule<TestScript>> script_module;
   script_module = script_core->newScriptModule<TestScript>("./sandbox/scripts/test_v.nut", "sq");
