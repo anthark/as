@@ -7,7 +7,7 @@ Getting Started
 ### Prerequisites
 - `cmake`, `ninja`, any C++ compiler
 - `LLVM 17.0.6`. For macOS and arm64, if it is not supplied, the pre-built binaries are downloaded automatically.
-- LuaJIT downloaded and built if you want to use Lua benchmarks
+- `LuaJIT` downloaded and built if you want to use Lua benchmarks
 
 The environment variable `LLVM_ROOT_DIR` should be set to the directory where the LLVM 17.0.6 binaries are located 
 (this directory should contain `bin`, `include`, `lib`, and other directories). 
