@@ -15,6 +15,11 @@
 #include "includes/set_get.h"
 #include "includes/simple.h"
 
+#include "as/core/core_exports.h"
+#include "as/languages/lua/lua_exports.h"
+#include "as/languages/ivnscript/is_exports.h"
+#include "as/languages/squirrel/sq_exports.h"
+
 extern "C" const void* __asRequireRuntime(as::Core* core, const char* name);
 extern "C" const void* __asRegisterVTable(as::Core* core, const char* name, as::ScriptModuleRuntime::FunctionPtr* vtable, int vtable_size);
 

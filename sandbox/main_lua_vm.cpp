@@ -10,6 +10,8 @@
 #include "scripts/test_vm.h"
 #include "scripts/logger.h"
 
+#include "as/core/core_exports.h"
+#include "as/languages/lua/lua_exports.h"
 
 struct LoggerImpl : Logger
 {

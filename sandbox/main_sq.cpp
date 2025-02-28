@@ -10,6 +10,9 @@
 #include "squirrel/include/sqstdio.h"
 #include "squirrel/include/sqstdaux.h"
 
+#include "as/core/core_exports.h"
+#include "as/languages/squirrel/sq_exports.h"
+
 void printfunc(HSQUIRRELVM v,const SQChar *s,...)
 {
     va_list vl;
