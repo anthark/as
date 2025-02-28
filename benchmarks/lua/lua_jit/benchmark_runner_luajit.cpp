@@ -5,7 +5,11 @@
 #include "benchmark_runner_luajit.h"
 #include "runner.h"
 
-#include <lua.hpp>
+extern "C" {
+#include "lua.h"
+#include "lualib.h"
+#include "lauxlib.h"
+}
 
 extern "C"
 {
