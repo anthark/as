@@ -1,4 +1,4 @@
-add_library(BanchmarkLuaJit SHARED
+add_library(BenchmarkLuaJit SHARED
     benchmark_runner_luajit.h
     benchmark_runner_luajit.cpp
 )
@@ -6,7 +6,7 @@ add_library(BanchmarkLuaJit SHARED
 set(LUA_JIT_INCLUDE "" CACHE STRING "Path to luajit includes")
 set(LUA_JIT_LIBS "" CACHE STRING "Path to luajit libs")
 
-target_include_directories(BanchmarkLuaJit PRIVATE "${LUA_JIT_INCLUDE}")
-target_link_directories(BanchmarkLuaJit PRIVATE "${LUA_JIT_LIBS}")
+target_include_directories(BenchmarkLuaJit PRIVATE "${LUA_JIT_INCLUDE}")
+target_link_directories(BenchmarkLuaJit PRIVATE "${LUA_JIT_LIBS}")
 
-target_link_libraries(BanchmarkLuaJit "${LUA_JIT_LIBS}/libluajit-5.1.a")
+target_link_libraries(BenchmarkLuaJit "${LUA_JIT_LIBS}/libluajit-5.1.a")

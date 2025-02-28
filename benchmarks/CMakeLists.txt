@@ -11,8 +11,8 @@ add_executable(Benchmark
 )
 #target_compile_options(Benchmark PUBLIC -fno-omit-frame-pointer)
 target_link_libraries(Benchmark
-    BanchmarkLuaAs
-    BanchmarkLuaClassic
-    BanchmarkLuaJit
+    BenchmarkLuaAs
+    BenchmarkLuaClassic
+    BenchmarkLuaJit
 )
 
