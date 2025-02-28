@@ -3,6 +3,7 @@
 //
 
 #include "benchmark_runner_luajit.h"
+#include "runner.h"
 
 #include <lua.hpp>
 

@@ -10,5 +10,5 @@
 
 namespace as::benchmark
 {
-    std::unique_ptr<IBenchmarkRunner> getRunnerLuaJit();
+    BENCHMARK_EXPORT std::unique_ptr<IBenchmarkRunner> getRunnerLuaJit();
 }

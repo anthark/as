@@ -9,6 +9,7 @@
 #include "as/languages/lua/lua_language_runtime.h"
 
 #include "benchmark_runner_luaas.h"
+#include "runner.h"
 
 DEFINE_SCRIPT_INTERFACE(TestCase,
   virtual double test() = 0;

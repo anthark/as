@@ -7,6 +7,16 @@
 #include <string>
 #include "../as/core/cpp_interface.h"
 
+#ifdef _MSC_VER
+#ifdef BENCHMARK_IMPORT
+#define BENCHMARK_EXPORT __declspec(dllimport)
+#else
+#define BENCHMARK_EXPORT __declspec(dllexport)
+#endif
+#else
+#define BENCHMARK_EXPORT
+#endif // _MSC_VER
+
 namespace as::benchmark
 {
 

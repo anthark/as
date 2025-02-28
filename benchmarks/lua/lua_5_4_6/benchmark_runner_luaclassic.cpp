@@ -3,6 +3,7 @@
 //
 
 #include "benchmark_runner_luaclassic.h"
+#include "runner.h"
 
 #include <memory>
 
