@@ -168,5 +168,6 @@ TEST_F(CppLanguageTest, CompileLinkTest)
 
 TEST_F(CppLanguageTest, CompileDebugInfoTest)
 {
-    doCompileDebugInfoTest("@[_\\w]+3foo[_\\w]+");
+    //doCompileDebugInfoTest("@[_\\w]+3foo[_\\w]+");
+    doCompileDebugInfoTest(R"(@[\"\w]+\?foo[@\w]+\")");
 }

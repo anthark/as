@@ -131,8 +131,12 @@ TEST(CoreCompileTest, BasePathTest)
 
     EXPECT_CALL(*language, init(testing::_, testing::_));
     EXPECT_CALL(*language, newScript()).WillOnce(testing::Return(language_script));
-    EXPECT_CALL(*language_script, load("some/base/path/script.foo", testing::_));
-    EXPECT_CALL(*language_script, getInterface("some/base/path/script.foo", testing::_));
+
+    std::filesystem::path canonicalPath = std::filesystem::weakly_canonical("some/base/path/script.foo");
+    std::string npath = canonicalPath.make_preferred().string();
+
+    EXPECT_CALL(*language_script, load(npath, testing::_));
+    EXPECT_CALL(*language_script, getInterface(npath, testing::_));
 
     compile->registerLanguage("foo", language);
     compile->newScriptModule("script.foo");
