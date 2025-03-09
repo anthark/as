@@ -79,10 +79,14 @@ std::shared_ptr<ScriptModuleCompile> CoreCompile::newScriptModule(
 {
     auto language = getLanguage(resolveLanguageName(filename, language_name));
     auto language_script = language->newScript();
-    language_script->load((m_base_path / filename).string(), *m_ts_context.getContext());
+    std::filesystem::path filepath = m_base_path / filename;
+    std::filesystem::path canonicalPath = std::filesystem::weakly_canonical(filepath);
+    std::string npath = canonicalPath.make_preferred().string();
 
-    const auto interface = language_script->getInterface((m_base_path / filename).string(), *m_cpp_parser);
-    const auto externalRequires = language_script->getRequires((m_base_path / filename).string(), *m_cpp_parser);
+    language_script->load(npath, *m_ts_context.getContext());
+
+    const auto interface = language_script->getInterface(npath, *m_cpp_parser);
+    const auto externalRequires = language_script->getRequires(npath, *m_cpp_parser);
 
     if (!interface)
     {

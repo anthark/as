@@ -444,7 +444,9 @@ void FeaturesTestFixture::doCompileDebugInfoTest(const std::string& func_pattern
     auto ll_code = compile(script_name);
     EXPECT_FALSE(ll_code.empty());
 
-    auto func_dbg_entry = getDebugEntryIndex(findFunctionDebugEntry(ll_code, "linkonce_odr i32", func_pattern));
+    std::filesystem::path canonicalPath = std::filesystem::weakly_canonical(ll_code);
+    std::string npath = canonicalPath.make_preferred().string();
+    auto func_dbg_entry = getDebugEntryIndex(findFunctionDebugEntry(npath, "linkonce_odr dso_local i32", func_pattern));
     EXPECT_FALSE(func_dbg_entry.empty());
 
     auto func_file_dbg_entry = getDebugEntryIndex(findDebugAttr(ll_code, func_dbg_entry, "file"));

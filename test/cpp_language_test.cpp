@@ -168,5 +168,19 @@ TEST_F(CppLanguageTest, CompileLinkTest)
 
 TEST_F(CppLanguageTest, CompileDebugInfoTest)
 {
-    doCompileDebugInfoTest("@[_\\w]+3foo[_\\w]+");
+    /*
+    * The test tries to find function definition in IR code to get DebugInfo.
+    * The following regex doesn't work with Windows + LLVM 18.1.0, but it (maybe) make sense for Unix-like + LLMV 17.06
+    * I assume that definition was:
+    * 
+    * define linkonce_odr dso_local i32 @_3foo@Test42_@UEAAHXZ_(ptr nonnull align 8 dereferenceable(8) %this) unnamed_addr #0 comdat align 2 !dbg !6 {
+    */
+    //doCompileDebugInfoTest("@[_\\w]+3foo[_\\w]+");
+
+    /*
+    * For Windows + LLVM 18.1.0 definition seems like:
+    * 
+    * define linkonce_odr dso_local i32 @"?foo@Test42@@UEAAHXZ"(ptr nonnull align 8 dereferenceable(8) %this) unnamed_addr #0 comdat align 2 !dbg !6 {
+    */
+    doCompileDebugInfoTest(R"(@[\"\w]+\?foo[@\w]+\")");
 }
